@@ -1,4 +1,4 @@
-from data_classes import Response, Request, Sys_request
+from data_classes import Response, Single_request, Sys_request
 from data_functions import functions, systems
 from methods import iterations_method_system, half_division_method, iterations_method
 
@@ -19,7 +19,7 @@ def read():
                 method = half_division_method
             else:
                 method = iterations_method
-            return Request(fun, method, term_left, term_right, accuracy)
+            return Single_request(fun, method, term_left, term_right, accuracy)
         else:
             print("Доступные системы:")
             for key, value in systems.items():
