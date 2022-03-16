@@ -34,7 +34,30 @@ def read():
             accuracy = float(input("Введите точность:"))
             return Sys_request(system, iterations_method_system, 0, 0, accuracy)
     else:
-        print("Не реализованно")
+        with open('file') as f:
+            lines = f.readlines()
+            if int(lines[0]) == 1:
+                fun = functions[int(lines[1])]
+                term_left = float(lines[2])
+                term_right = float(lines[3])
+                fun.approx_left = float(lines[4])
+                fun.approx_right = float(lines[5])
+                accuracy = float(lines[6])
+                if int(lines[7]) == 1:
+                    method = half_division_method
+                else:
+                    method = iterations_method
+                return Single_request(fun, method, term_left, term_right, accuracy)
+            else:
+                system = systems[int(lines[1])]
+                # term_left = float(input("Введите левый край отрезка для рассмотрения:"))
+                # term_right = float(input("Введите правый край отрезка для рассмотрения:"))
+                system["first"].approx_left = float(lines[2])
+                system["first"].approx_right = float(lines[3])
+                system["second"].approx_left = float(lines[4])
+                system["second"].approx_right = float(lines[5])
+                accuracy = float(lines[6])
+                return Sys_request(system, iterations_method_system, 0, 0, accuracy)
 
 
 def write(response: Response):
