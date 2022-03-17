@@ -15,7 +15,7 @@ def half_division_method(request: Single_request):
 
     if same_sign(fun.exe(fun.approx_left),
                  fun.exe(fun.approx_right)):
-        response.message = "No one root"
+        response.message = "Нет корней"
         response.code = 1
         return response
 

@@ -9,7 +9,12 @@ from in_out import read, write, write_sys, write_err
 def paint(request):
     if type(request) == Single_request:
         x = np.arange(request.term_left, request.term_right, 0.01)
-        plt.plot(x, request.function.exe(x))
+        ax = plt.gca()
+        ax.spines['left'].set_position('center')
+        ax.spines['bottom'].set_position('center')
+        ax.spines['right'].set_color('none')
+        ax.spines['top'].set_color('none')
+        ax.plot(x, request.function.exe(x), "red", linewidth=1.5)
         plt.show()
     else:
         x, y = sp.symbols("x y")
@@ -18,8 +23,7 @@ def paint(request):
 
 
 if __name__ == '__main__':
-    request = read()
-    paint(request)
+    request = read(paint)
     response = request.method(request)
     if response.code == 1:
         write_err(response)

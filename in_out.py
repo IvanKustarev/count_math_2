@@ -3,7 +3,7 @@ from data_functions import functions, systems
 from methods import iterations_method_system, half_division_method, iterations_method
 
 
-def read():
+def read(paint):
     if int(input("Введите 1 для ввода с консоли или 2 для ввода из файла:")) == 1:
         if int(input("Введите 1 для решения уравнения или 2 для решения системы уравнений:")) == 1:
             print("Доступные уравнения:")
@@ -12,6 +12,7 @@ def read():
             fun = functions[int(input("Введите номер уравнения:"))]
             term_left = float(input("Введите левый край отрезка для рассмотрения:"))
             term_right = float(input("Введите правый край отрезка для рассмотрения:"))
+            paint(Single_request(fun, {}, term_left, term_right, {}))
             fun.approx_left = float(input("Введите левый край приближения:"))
             fun.approx_right = float(input("Введите правый край приближения:"))
             accuracy = float(input("Введите точность:"))
@@ -25,8 +26,7 @@ def read():
             for key, value in systems.items():
                 print("№" + str(key) + ":\n" + value["first"].present + "\n" + value["second"].present)
             system = systems[int(input("Введите номер системы:"))]
-            # term_left = float(input("Введите левый край отрезка для рассмотрения:"))
-            # term_right = float(input("Введите правый край отрезка для рассмотрения:"))
+            paint(Sys_request(system, {}, 0, 0, {}))
             system["first"].approx_left = float(input("Введите левый край приближения x:"))
             system["first"].approx_right = float(input("Введите правый край приближения x:"))
             system["second"].approx_left = float(input("Введите левый край приближения y:"))
@@ -40,6 +40,7 @@ def read():
                 fun = functions[int(lines[1])]
                 term_left = float(lines[2])
                 term_right = float(lines[3])
+                paint(Single_request(fun, {}, term_left, term_right, {}))
                 fun.approx_left = float(lines[4])
                 fun.approx_right = float(lines[5])
                 accuracy = float(lines[6])
@@ -50,8 +51,7 @@ def read():
                 return Single_request(fun, method, term_left, term_right, accuracy)
             else:
                 system = systems[int(lines[1])]
-                # term_left = float(input("Введите левый край отрезка для рассмотрения:"))
-                # term_right = float(input("Введите правый край отрезка для рассмотрения:"))
+                paint(Sys_request(system, {}, 0, 0, {}))
                 system["first"].approx_left = float(lines[2])
                 system["first"].approx_right = float(lines[3])
                 system["second"].approx_left = float(lines[4])
@@ -61,18 +61,18 @@ def read():
 
 
 def write(response: Response):
-    print("root = " + str(response.root))
-    print("function in root = " + str(response.fun_in_root))
-    print("iteration count  = " + str(response.i_count))
+    print("Корень = " + str(response.root))
+    print("Значение функции в корне = " + str(response.fun_in_root))
+    print("Количество итерраций  = " + str(response.i_count))
 
 
 def write_sys(response: Response):
-    print("root = " + str(response.root))
-    print("iteration count  = " + str(response.i_count))
+    print("Корни = " + str(response.root))
+    print("Количество итерраций  = " + str(response.i_count))
     print("Вектор погрешностей:")
     for key, value in response.error_vector.items():
         print(str(key) + ": " + str(value))
 
 
 def write_err(response: Response):
-    print("ERROR!: " + response.message)
+    print("ОШИБКА!: " + response.message)
