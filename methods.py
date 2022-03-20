@@ -99,6 +99,10 @@ def iterations_method_system(sys_request: Sys_request):
             response.root = {x, y}
             response.fun_in_root = {first_fun.exe(x, y), second_fun.exe(x, y)}
             break
+        if response.i_count == 50:
+            response.message = "Приближение выбрано неточно"
+            response.code = 1
+            return response
         last_x = x
         last_y = y
     return response

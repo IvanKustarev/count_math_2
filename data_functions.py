@@ -32,5 +32,25 @@ systems = {
             lambda x, y: y + 0.2 * x ** 2 - 0.1 * x - 0.7,
             "y+0.2*x^2-0.1*x-0.7"
         )
-    }
+    },
+    2: {
+        "first": Function(
+            lambda x, y: 0.1 * x ** 2 + x + 0.2 * y ** 2 - 0.3,
+            "0.1 * x ^ 2 + x + 0.2 * y^2 - 0.3"
+        ),
+        "second": Function(
+            lambda x, y: 0.2 * x ** 2 + y - 0.1 * x * y - 0.7,
+            "0.2 * x ^ 2 + y - 0.1 * x * y - 0.7"
+        )
+    },
+    # 3: {
+    #     "first": Function(
+    #         lambda x, y: x**2-x+0.2-y,
+    #         "x^2-x+0.2-y"
+    #     ),
+    #     "second": Function(
+    #         lambda x, y: x**2-0.2*x-y,
+    #         "x^2-0.2*x-y"
+    #     )
+    # }
 }
