@@ -60,6 +60,10 @@ def iterations_method(request: Single_request):
             response.fun_in_root = fun.exe(x)
             break
         last_x = x
+        if response.i_count > 100:
+            response.message = "Достаточное услоовие сходимости не выполнено"
+            response.code = 1
+            return response
     return response
 
 
